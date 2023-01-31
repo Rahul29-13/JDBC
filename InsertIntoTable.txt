@@ -1,0 +1,32 @@
+package JDBC;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class InsertData {
+	
+	public static final String InsertIntoTable = "INSERT INTO Users1 " +
+			"VALUES (1, 'Pramod', 'pramod@gmail.com', 'India', 123)," + 
+			"(2,'Deepa', 'deepa@gmail.com', 'India', 123)," + 
+			"(3, 'Tom', 'top@gmail.com', 'India', 123);";
+
+	public static void main(String[] args) throws SQLException {
+		InsertData id = new InsertData();
+		id.insertTable();
+	}
+	
+	public void insertTable() throws SQLException{
+		System.out.println(InsertIntoTable);
+		try(Connection connections = DriverManager.getConnection("jdbc:mysql://localhost:3306/EBookShop","root","root");
+		Statement statement=connections.createStatement();){
+			int result = statement.executeUpdate(InsertIntoTable);
+			System.out.println("No. of Response : "+ result);
+		}catch(SQLException e) {
+			System.out.println(e);
+		}
+				
+	}
+
+}

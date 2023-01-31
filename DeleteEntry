@@ -1,0 +1,30 @@
+package JDBC;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class DeleteUser {
+	
+	public static final String DeleteEntry = "delete from Users1 where id = 3;";
+
+	public static void main(String[] args) throws SQLException{
+		DeleteUser du = new DeleteUser();
+		du.deleteRecord();
+	}
+	
+	public void deleteRecord() throws SQLException{
+		System.out.println(DeleteEntry);
+		try{
+			Connection connections = DriverManager.getConnection("jdbc:mysql://localhost:3306/EBookShop","root","root");
+		    	Statement statement=connections.createStatement();
+			statement.execute(DeleteEntry);
+		}
+		catch(SQLException e) {
+			System.out.println(e);
+		}
+				
+	}
+
+}
